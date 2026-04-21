@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 哈哈动漫网</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .admin-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .admin-logo { font-size: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .admin-nav { display: flex; gap: 30px; }
+        .admin-nav a { color: rgba(255,255,255,0.8); transition: color 0.3s; font-size: 15px; }
+        .admin-nav a:hover, .admin-nav a.active { color: #fff; }
+        .admin-user { display: flex; align-items: center; gap: 15px; }
+        .admin-user span { font-size: 14px; }
+        .logout-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: background 0.3s; }
+        .logout-btn:hover { background: rgba(255,255,255,0.3); }
+        
+        .admin-container { display: flex; min-height: calc(100vh - 60px); }
+        
+        .sidebar { width: 220px; background: #fff; border-right: 1px solid #e8e8e8; padding: 20px 0; }
+        .sidebar-section { margin-bottom: 10px; }
+        .sidebar-title { padding: 10px 20px; font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar-menu { }
+        .sidebar-item { }
+        .sidebar-item a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #666; font-size: 14px; transition: all 0.3s; border-left: 3px solid transparent; }
+        .sidebar-item a:hover { background: #f5f7fa; color: #667eea; border-left-color: #667eea; }
+        .sidebar-item a.active { background: linear-gradient(90deg, rgba(102,126,234,0.1), transparent); color: #667eea; border-left-color: #667eea; font-weight: 500; }
+        .sidebar-item .icon { width: 20px; text-align: center; }
+        
+        .main-content { flex: 1; padding: 30px; }
+        .page-title { font-size: 24px; font-weight: 600; margin-bottom: 25px; color: #333; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 25px; color: #fff; box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+        .stat-card.secondary { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .stat-card.warning { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-card.info { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-value { font-size: 36px; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { font-size: 14px; opacity: 0.9; }
+        
+        .card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        
+        .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .quick-link { display: flex; align-items: center; gap: 15px; padding: 20px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; cursor: pointer; }
+        .quick-link:hover { background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); transform: translateY(-2px); }
+        .quick-link .icon { width: 45px; height: 45px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; }
+        .quick-link .text h4 { font-size: 15px; margin-bottom: 3px; }
+        .quick-link .text p { font-size: 12px; color: #999; }
+        
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+        .table th { background: #f8f9fa; font-weight: 600; color: #666; }
+        .table tr:hover { background: #f8f9fa; }
+        .table .cover { width: 60px; height: 80px; border-radius: 6px; object-fit: cover; background: #eee; }
+        
+        .btn { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.3s; border: none; }
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+        .btn-primary:hover { box-shadow: 0 4px 15px rgba(102,126,234,0.4); transform: translateY(-1px); }
+        .btn-success { background: #52c41a; color: #fff; }
+        .btn-success:hover { background: #73d13d; }
+        .btn-danger { background: #ff4d4f; color: #fff; }
+        .btn-danger:hover { background: #ff7875; }
+        .btn-sm { padding: 5px 10px; font-size: 12px; }
+        
+        @media (max-width: 768px) {
+            .admin-nav { display: none; }
+            .sidebar { width: 60px; }
+            .sidebar-title, .sidebar-item a span:not(.icon) { display: none; }
+            .sidebar-item a { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-logo">
+            🎬 哈哈动漫网管理系统
+        </div>
+        <nav class="admin-nav">
+            <a href="/admin/index" class="active">首页</a>
+            <a href="/admin/anime">动漫管理</a>
+            <a href="/admin/news">资讯管理</a>
+            <a href="/admin/category">分类管理</a>
+            <a href="/admin/banner">轮播图</a>
+            <a href="/admin/user">用户管理</a>
+        </nav>
+        <div class="admin-user">
+            <span sec:authentication="name">管理员</span>
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" class="logout-btn">退出</button>
+            </form>
+        </div>
+    </header>
+    
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">内容管理</div>
+                <div class="sidebar-menu">
+                    <div class="sidebar-item"><a href="/admin/anime"><span class="icon">🎬</span><span>动漫管理</span></a></div>
+                    <div class="sidebar-item"><a href="/admin/news"><span class="icon">📰</span><span>资讯管理</span></a></div>
+                    <div class="sidebar-item"><a href="/admin/category"><span class="icon">📂</span><span>分类管理</span></a></div>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">系统设置</div>
+                <div class="sidebar-menu">
+                    <div class="sidebar-item"><a href="/admin/banner"><span class="icon">🖼️</span><span>轮播图管理</span></a></div>
+                    <div class="sidebar-item"><a href="/admin/home/config"><span class="icon">🏠</span><span>首页配置</span></a></div>
+                    <div class="sidebar-item"><a href="/admin/user"><span class="icon">👥</span><span>用户管理</span></a></div>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">快捷操作</div>
+                <div class="sidebar-menu">
+                    <div class="sidebar-item"><a href="/admin/anime/add"><span class="icon">➕</span><span>添加动漫</span></a></div>
+                    <div class="sidebar-item"><a href="/admin/news/add"><span class="icon">➕</span><span>添加资讯</span></a></div>
+                    <div class="sidebar-item"><a href="/aaa" target="_blank"><span class="icon">🌐</span><span>访问网站</span></a></div>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <h1 class="page-title">控制台</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" th:text="${animeCount} ?: '0'">0</div>
+                    <div class="stat-label">动漫总数</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="stat-value" th:text="${newsCount} ?: '0'">0</div>
+                    <div class="stat-label">资讯总数</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-value" th:text="${bannerCount} ?: '0'">0</div>
+                    <div class="stat-label">轮播图数量</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-value" th:text="${categoryCount} ?: '0'">0</div>
+                    <div class="stat-label">分类数量</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">快捷操作</h3>
+                <div class="quick-links">
+                    <a href="/admin/anime/add" class="quick-link">
+                        <div class="icon">🎬</div>
+                        <div class="text">
+                            <h4>添加动漫</h4>
+                            <p>添加新的动漫内容</p>
+                        </div>
+                    </a>
+                    <a href="/admin/news/add" class="quick-link">
+                        <div class="icon">📰</div>
+                        <div class="text">
+                            <h4>添加资讯</h4>
+                            <p>发布最新动漫资讯</p>
+                        </div>
+                    </a>
+                    <a href="/admin/banner/add" class="quick-link">
+                        <div class="icon">🖼️</div>
+                        <div class="text">
+                            <h4>添加轮播图</h4>
+                            <p>设置首页轮播图</p>
+                        </div>
+                    </a>
+                    <a href="/admin/home/config" class="quick-link">
+                        <div class="icon">🏠</div>
+                        <div class="text">
+                            <h4>首页配置</h4>
+                            <p>配置首页模块</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">最新动漫</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>封面</th>
+                            <th>标题</th>
+                            <th>类型</th>
+                            <th>状态</th>
+                            <th>评分</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="animeTableBody">
+                        <tr><td colspan="6" style="text-align:center;padding:30px;color:#999;">加载中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        async function loadRecentAnime() {
+            try {
+                const res = await fetch('/api/anime/list/page?page=1&size=5');
+                const json = await res.json();
+                if (json.code === 200 && json.data) {
+                    const tbody = document.getElementById('animeTableBody');
+                    tbody.innerHTML = json.data.records.map(anime => `
+                        <tr>
+                            <td><img src="${anime.coverImage || ''}" class="cover" onerror="this.style.background='#eee'"></td>
+                            <td>${anime.title}</td>
+                            <td>${anime.type || '-'}</td>
+                            <td>${anime.status || '-'}</td>
+                            <td>⭐ ${anime.rating || 0}</td>
+                            <td>
+                                <a href="/admin/anime/edit/${anime.id}" class="btn btn-primary btn-sm">编辑</a>
+                                <button onclick="deleteAnime(${anime.id})" class="btn btn-danger btn-sm">删除</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            } catch(e) { console.log('加载失败'); }
+        }
+        
+        async function deleteAnime(id) {
+            if (!confirm('确定要删除吗？')) return;
+            try {
+                const res = await fetch('/admin/anime/delete/' + id, { method: 'POST' });
+                const json = await res.json();
+                alert(json.message);
+                if (json.code === 200) loadRecentAnime();
+            } catch(e) { alert('删除失败'); }
+        }
+        
+        loadRecentAnime();
+    </script>
+</body>
+</html>

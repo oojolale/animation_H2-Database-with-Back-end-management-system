@@ -1,0 +1,537 @@
+@font-face {
+	font-family: iconfont;
+	src: url(../font/font_1699811_nbqws6y2mj.woff2) format("woff2"),
+		url(../font/font_1699811_nbqws6y2mj.woff) format("woff"),
+		url(../font/font_1699811_nbqws6y2mj.ttf) format("truetype")
+}
+
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+	font-family: "阿里妈妈灵动体 VF Thin";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	font-display: swap;
+	src: url(../font/alimamaAgile/AlimamaAgileVF-Thin.woff2) format("woff2"),
+		url(../font/alimamaAgile/AlimamaAgileVF-Thin.woff) format("woff"),
+		url(../font/alimamaAgile/AlimamaAgileVF-Thin.ttf) format("truetype")
+}
+
+@font-face {
+	font-family: "阿里妈妈刀隶体";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	font-display: swap;
+	src: url(../font/alimamaInDaoLi/AlimamaDaoLiTi.woff2) format("woff2"),
+		url(../font/alimamaInDaoLi/AlimamaDaoLiTi.woff) format("woff"),
+		url(../font/alimamaInDaoLi/AlimamaDaoLiTi.ttf) format("truetype")
+}
+
+@font-face {
+	font-family: "得意黑";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	font-display: swap;
+	src: url(../font/smugBlack/SmileySans-Oblique.woff2) format("woff2"),
+		url(../font/smugBlack/SmileySans-Oblique.woff) format("woff"),
+		url(../font/smugBlack/SmileySans-Oblique.ttf) format("truetype"),
+		url(../font/smugBlack/SmileySans-Oblique.otf) format("opentype")
+		/* font-variation-settings: normal;font-display: swap; */
+}
+
+@font-face {
+	font-family: "Nabla 彩色可变字体";
+	font-variation-settings: "EDPT" 100, "EHLT" 12;
+	font-display: swap;
+	src: url(../font/nablaColorVariableFont/Nabla_Regular.woff2) format("woff2"),
+		url(../font/nablaColorVariableFont/Nabla_Regular.woff) format("woff"),
+		url(../font/nablaColorVariableFont/Nabla_Regular.ttf) format("truetype")
+}
+
+@font-face {
+	font-family: "钉钉进步体 Regular";
+	font-variation-settings: normal;
+	src: url(../font/dingTalkProgress/DingTalk-JinBuTi.woff2) format("woff2"),
+		url(../font/dingTalkProgress/DingTalk-JinBuTi.woff) format("woff"),
+		url(../font/dingTalkProgress/DingTalk-JinBuTi.ttf) format("truetype")
+}
+
+.alimamaInDaoLi {
+	font-family: "阿里妈妈刀隶体";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	/* Chrome 140 以下版本需要 */
+}
+
+.alimamaAgile {
+	font-family: "阿里妈妈灵动体 VF Thin";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	/* Chrome 140 以下版本需要 */
+}
+
+.smugBlack {
+	font-family: "得意黑";
+	font-variation-settings: "SRIF" 0, "slnt" 0, "wdth" 75, "wght" 100;
+	/* Chrome 140 以下版本需要 */
+}
+
+.nablaColorVariableFont {
+	font-family: "Nabla 彩色可变字体";
+	font-variation-settings: "EDPT" 100, "EHLT" 12;
+	font-display: swap;
+}
+
+.dingTalkProgress {
+	font-family: "钉钉进步体 Regular";
+	font-variation-settings: normal;
+}
+
+:root {
+	--primary: #f40;
+	--bg-primary: #fff;
+	--bg-gray: #24252b;
+	scroll-behavior: smooth;
+	--font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-emoji: apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla, segoe ui symbol, Noto Color Emoji Compat, emoji, sans-serif;
+}
+
+:root .iconfont {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+body {
+	font: 14px tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+}
+
+.container {
+	width: 98vw;
+	margin: 0;
+	padding: 0;
+}
+
+.upper {
+	display: flex;
+	width: 80%;
+	margin: auto;
+	position: relative;
+	line-height: 28px;
+	height: 28px;
+}
+
+#diy {
+	position: absolute;
+	right: 0;
+}
+
+.top {
+	width: 100%;
+	height: 33px;
+	border: 0px solid red;
+	display: flex;
+	align-items: center;
+}
+
+.box {
+	display: flex;
+	width: 80%;
+	margin: auto;
+}
+
+.logo {
+	width: 50px;
+}
+
+.search {
+	display: flex;
+	align-items: center;
+}
+
+.notice {
+	display: flex;
+	align-items: center;
+}
+
+.change .button {
+	margin: 10px 0;
+	cursor: pointer;
+}
+
+.navigate {
+	padding: 0 5px;
+	box-sizing: content-box;
+}
+
+.navigate .nav {
+	padding: 0 25px;
+	display: flex;
+	align-items: center;
+}
+
+.navigate .nav.active {
+	background-color: #3498db;
+	color: #fff;
+	border-radius: 30px;
+}
+
+.navigate .nav span {
+	cursor: pointer;
+}
+
+.navigate .nav span:hover {
+	color: #ff5e3a;
+}
+
+.combo {
+	display: flex;
+}
+
+.combo>div {
+	cursor: pointer;
+}
+
+.combo>div:hover {
+	color: #ff5e3a;
+}
+
+:root .iconfont {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.iconfont {
+	font-family: iconfont;
+	font-style: normal;
+}
+
+.iconfanyijianli:before {
+	content: "\e644";
+}
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+.nav_switch {
+	padding: 0 !important;
+	margin-bottom: 0;
+	/* color: #fff; */
+	font-size: 20px;
+	padding: 0 1rem;
+	cursor: pointer;
+	/* border-left: 1px solid #3f4257; */
+	display: none;
+	position: relative;
+}
+
+.nav_switch[for=lang],
+a.nav_switch {
+	display: flex;
+	align-items: center;
+}
+
+.nav_switch:active,
+.nav_switch:focus,
+.nav_switch:hover {
+	color: #ff5e3a;
+}
+
+.banner {
+	border: 1px solid #000;
+	margin-right: 15px;
+}
+
+.advertise .guide {
+	height: 15%;
+	border: 1px solid #000;
+}
+
+.advertise .primer {
+	height: 85%;
+	border: 1px solid #000;
+}
+
+.navigation {
+	margin: auto;
+	margin-top: 10px;
+	display: flex;
+	width: 80%;
+	height: 30px;
+	/* border: 1px solid orange; */
+	line-height: 25px;
+	position: relative;
+}
+
+.navigation span.text {
+	cursor: pointer;
+}
+
+.navigation span.text:hover {
+	color: #ff5e3a;
+}
+
+.navigation .punctuation {
+	transform: translateX(4px);
+}
+
+.navigation .history {
+	position: absolute;
+	right: 0;
+}
+
+.navigation .history span {
+	padding: 0 5px
+}
+
+.navigation .history span:last-child {
+	padding-right: 0;
+}
+
+.navigation .history .userCard {
+	color: #0000ff;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.promotion {
+	margin: auto;
+	margin-top: 10px;
+	display: flex;
+	width: 80%;
+	height: 220px;
+	border: 0px solid orange
+}
+
+.indulge {
+	display: flex;
+	margin: auto;
+	margin-top: 10px;
+	width: 80%;
+	height: 1500px;
+	border: 0px solid blue;
+	padding-bottom: 7px;
+}
+
+.section1 {
+	height: 100%;
+	padding-right: 15px;
+}
+
+.section1 .report {
+	margin-top: 10px;
+	height: calc(32% - 10px);
+	border: 0px solid #000;
+	overflow: hidden;
+}
+
+.section1 .public {
+	margin-top: 10px;
+	height: calc(12% + 0px);
+	border: 0px solid #000;
+}
+
+.section1 .collection {
+	height: calc(14% - 12px);
+	border: 0px solid #000;
+}
+
+.section1 .enterprise {
+	height: calc(22% - 10px);
+	border: 0px solid #000;
+	margin-top: 10px;
+}
+
+.section1 .onlineMember {
+	margin-top: 10px;
+	height: calc(20% - 10px);
+	border: 0px solid #000;
+}
+
+.section2 {
+	height: 100%;
+	margin-right: 15px;
+	border: 0px solid #000;
+}
+
+.section2 .recently {
+	height: 30%;
+	border: 0px solid #000;
+}
+
+.section2 .advert {
+	/* margin-top: 15px; */
+	height: 10%;
+	border: 0px solid #000;
+}
+
+.section2 .papers {
+	/* margin-top: 15px; */
+	height: 60%;
+	border: 0px solid #000;
+}
+
+.section2 .papers>div:nth-of-type(1) {
+	border: 0px solid #eaeaea;
+	line-height: 40px;
+}
+
+.section2 .papers>div:nth-of-type(1)>div {
+	margin: 0 20px;
+}
+
+.section2 .papers>div:nth-of-type(1)>div {
+	transform: translateX(-20px);
+	cursor: pointer;
+}
+
+.section2 .papers>div:nth-of-type(1)>div.active {
+	border-bottom: 2px solid blue;
+}
+
+.section2 .papers>div:nth-of-type(1) {
+	padding: 0 10px;
+}
+
+.section2 .papers>div:nth-child(2)>div {
+	display: flex;
+	padding: 10px;
+}
+
+.section2 .papers>div:nth-child(2)>div>div:nth-child(1) {
+	width: 80px;
+	height: 80px;
+}
+
+.section2 .papers>div:nth-child(2)>div>div:nth-child(2) {
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+}
+
+.section2 .papers>div:nth-child(2)>div>div:nth-child(2)>div:nth-child(2) {
+	display: flex;
+	justify-content: space-between;
+}
+
+.section2 .papers>div:nth-child(2)>div>div:nth-child(2)>div:nth-child(2)>div:nth-child(2) {
+	display: flex;
+}
+
+.section2 .papers>div:nth-child(2)>div>div:nth-child(2)>div:nth-child(2)>div:nth-child(2)>div:nth-child(1) {
+	margin-right: 20px;
+}
+
+.section3 {
+	height: 100%;
+	border: 0px solid #000;
+}
+
+.upload {
+	border: 0px solid #000;
+	position: absolute;
+	right: 0;
+}
+
+.upload button {
+	width: 195px;
+	background-color: blue;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 5px;
+	border: 0px solid #fff;
+	padding: 3px 0;
+	margin-top: 1px;
+	line-height: 20px;
+	font-size: 13px;
+}
+
+.upload button:hover {
+	background-color: #0000ffc2;
+}
+
+.section3 .topic {
+	height: calc(14% - 12px);
+	overflow: auto;
+	border: 0px solid #eaeaea;
+	border-radius: 8px;
+	background: #fafafa;
+}
+
+.topicNote {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px 0;
+}
+
+.topicNoteBox {
+	overflow: auto;
+}
+
+.scroll {
+	/* 针对Firefox浏览器 */
+	scrollbar-width: thin;
+	scrollbar-color: #3498db #f1f1f1;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	background: linear-gradient(to bottom, #3498db, #2980b9);
+	border-radius: 6px;
+	border: 0px solid #f1f1f1;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(to bottom, #2980b9, #1f639b);
+}
+
+.scroll::-webkit-scrollbar {
+	width: 12px;
+}
+
+.scroll::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 6px;
+}
+
+.section3 .organic {
+	height: calc(29% - 7px - 10px);
+	border: 0px solid #000;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.section3 .organic .organicBox {
+	height: 30%;
+}
+
+.section3 .organic .organicBox>div {
+	display: flex;
+}
+
+.section3 .privacy {
+	height: calc(30% - 10px);
+	border: 0px solid #000;
+	margin-top: 10px;
+}
+
+.section3 .privacy .privacyTab {
+	cursor: pointer;
+	margin-right: 6px;
+}
+
+.section3 .privacy .privacyTab:hover {
+	background-color: #3498db;
+	color: #fff;
+}
+
+.section3 .privacy .privacyTab.active {
+	background-color: #3498db;
+	color: #fff;
+}
+
+.section3 .news {
+	height: calc(27% + 7px);
+	border: 0px solid #000;
+	margin-top: 10px;
+}
+
+ol li {
+	/* list-style-type: hiragana; */
+}

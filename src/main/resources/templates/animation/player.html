@@ -1,0 +1,1851 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>播放中 - 哈哈动漫网</title>
+    <link rel="stylesheet" href="/muiplayer/mui-player/dist/mui-player.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            color: #fff;
+            min-width: 320px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部区域 - 与/animation/index.html一致 */
+        .header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: #fff;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 450px;
+            display: flex;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-box button {
+            padding: 10px 25px;
+            border: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .search-box button:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 导航 */
+        .nav {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-list {
+            display: flex;
+            padding: 0 15px;
+        }
+
+        .nav-list li {
+            flex-shrink: 0;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 14px 20px;
+            color: #ccc;
+            transition: all 0.3s;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-list a:hover::after,
+        .nav-list a.active::after {
+            width: 80%;
+        }
+
+        .nav-list a:hover {
+            color: #ffd700;
+        }
+
+        .nav-list a.active {
+            color: #ffd700;
+        }
+
+        /* 播放页面样式 */
+        .player-container {
+            padding: 20px 0 50px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+        }
+
+        .player-main {
+            display: flex;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .player-main {
+                flex-direction: column;
+            }
+        }
+
+        .player-left {
+            flex: 1;
+        }
+
+        .player-right {
+            width: 350px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 992px) {
+            .player-right {
+                width: 100%;
+            }
+        }
+
+        /* 视频播放器 */
+        .video-container {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .video-player {
+            width: 100%;
+            background: #000;
+            position: relative;
+        }
+
+        /* 播放进度显示 */
+        .play-progress {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            flex: 1;
+            margin: 0 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .progress-time {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            min-width: 100px;
+        }
+
+        .progress-time span {
+            margin: 0 5px;
+        }
+
+        /* 当前播放信息 */
+        .current-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .current-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .current-episode {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .current-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .current-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .current-btn.prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .current-btn.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .current-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 选集列表 */
+        .episode-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .episode-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .episode-list-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .episode-search {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            width: 150px;
+            font-size: 12px;
+        }
+
+        .episode-search::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .episode-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .episode-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .episode-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .episode-item.current {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-left: 3px solid #667eea;
+        }
+
+        .episode-number {
+            font-weight: 500;
+        }
+
+        .episode-duration {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* 动漫信息侧边栏 */
+        .anime-sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .anime-sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anime-sidebar-cover {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .anime-sidebar-info {
+            margin-bottom: 15px;
+        }
+
+        .anime-sidebar-info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .info-value {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 评论区域 */
+        .comments-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comments-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .comment-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .comment-input textarea {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .comment-input textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .comment-submit {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .comment-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .comment-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .comment-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .comment-user {
+            font-weight: 500;
+            color: #ffd700;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .comment-content {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .video-player {
+                height: 300px;
+            }
+
+            .episode-list-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .episode-search {
+                width: 100%;
+            }
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        /* 隐藏播放器内部的返回按钮 */
+        #mui-player #back-button,
+        #mui-player .back-button,
+        #mui-player .header-control.back-button,
+        #mui-player #title-groupt {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+<!-- 头部区域 -->
+<header class="header">
+    <div class="container">
+        <div class="header-top">
+            <a href="/animation/index.html" class="logo">🎬 哈哈<span>动漫</span></a>
+            <div class="search-box">
+                <input type="text" placeholder="搜索动漫、电影、电视剧...">
+                <button>🔍 搜索</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 导航 -->
+<nav class="nav">
+    <ul class="nav-list container">
+        <li><a href="/animation/index.html">首页</a></li>
+        <li><a href="/animation/japanese.html">日本动漫</a></li>
+        <li><a href="/animation/chinese.html">国产动漫</a></li>
+        <li><a href="/animation/western.html">欧美动漫</a></li>
+        <li><a href="/animation/movies.html">电影</a></li>
+        <li><a href="tv.html">电视剧</a></li>
+        <li><a href="variety.html">综艺</a></li>
+        <li><a href="documentary.html">纪录片</a></li>
+        <li><a href="/anime/news">资讯</a></li>
+        <li><a href="/anime/rankings">排行榜</a></li>
+    </ul>
+</nav>
+
+<!-- 播放页面内容 -->
+<div class="container player-container">
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="/animation/index.html">首页</a>
+        <span>&gt;</span>
+        <a href="/animation/japanese.html" id="breadcrumb-type-link">日本动漫</a>
+        <span>&gt;</span>
+        <a href="/animation/detail.html" id="breadcrumb-anime-link">海贼王</a>
+        <span>&gt;</span>
+        <span id="breadcrumb-episode">第1100集 播放中</span>
+    </div>
+
+    <div class="player-main">
+        <!-- 左侧：视频播放器和选集 -->
+        <div class="player-left">
+            <!-- 视频播放器 -->
+            <div class="video-container">
+                <div class="video-player" id="mui-player"></div>
+            </div>
+
+            <!-- 播放进度显示 -->
+            <div class="play-progress" style="display: none">
+                <div class="progress-time">
+                    <span id="currentTime">00:00</span>
+                </div>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-time">
+                    <span id="totalTime">24:30</span>
+                </div>
+            </div>
+
+            <!-- 当前播放信息 -->
+            <div class="current-info">
+                <div class="current-title" id="page-title">海贼王 One Piece</div>
+                <div class="current-episode" id="page-episode">第1100集 · 最终决战！路飞VS凯多</div>
+                <div class="current-actions">
+                    <button class="current-btn prev" onclick="playPrevEpisode()">◀ 上一集</button>
+                    <button class="current-btn next" onclick="playNextEpisode()">下一集 ▶</button>
+                </div>
+            </div>
+
+            <!-- 选集列表 -->
+            <div class="episode-list">
+                <div class="episode-list-header">
+                    <div class="episode-list-title">剧集列表</div>
+                    <input type="text" class="episode-search" placeholder="搜索剧集..." oninput="searchEpisodes(this.value)">
+                </div>
+
+                <div class="episode-scroll" id="episodeScroll">
+                    <!-- 剧集列表将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧：动漫信息和相关推荐 -->
+        <div class="player-right">
+            <!-- 动漫信息侧边栏 -->
+            <div class="anime-sidebar">
+                <div class="anime-sidebar-title">
+                    <span>📺 动漫信息</span>
+                </div>
+                <div class="anime-sidebar-cover" id="sidebar-cover"></div>
+                <div class="anime-sidebar-info">
+                    <div class="anime-sidebar-info-item">
+                        <span class="info-label">名称：</span>
+                        <span class="info-value" id="sidebar-title">海贼王 One Piece</span>
+                    </div>
+                    <div class="anime-sidebar-info-item">
+                        <span class="info-label">类型：</span>
+                        <span class="info-value" id="sidebar-type">热血·冒险·战斗</span>
+                    </div>
+                    <div class="anime-sidebar-info-item">
+                        <span class="info-label">状态：</span>
+                        <span class="info-value" id="sidebar-status">更新中</span>
+                    </div>
+                    <div class="anime-sidebar-info-item">
+                        <span class="info-label">评分：</span>
+                        <span class="info-value" id="sidebar-rating">⭐ 9.8</span>
+                    </div>
+                    <div class="anime-sidebar-info-item">
+                        <span class="info-label">总集数：</span>
+                        <span class="info-value" id="sidebar-episodes">1100+</span>
+                    </div>
+                </div>
+                <button class="sidebar-btn" id="sidebar-detail-btn" onclick="window.location.href='/animation/detail.html'">查看详情</button>
+            </div>
+
+            <!-- 相关推荐 -->
+            <div class="anime-sidebar">
+                <div class="anime-sidebar-title">
+                    <span>🎬 相关推荐</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="recommend-sidebar-item" onclick="playAnime('火影忍者', 720)">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 60px; height: 40px; background: linear-gradient(135deg, #ff6b6b, #ffa726); border-radius: 4px; flex-shrink: 0;"></div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 500;">火影忍者</div>
+                                <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">第720集</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommend-sidebar-item" onclick="playAnime('鬼灭之刃', 55)">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 60px; height: 40px; background: linear-gradient(135deg, #9c27b0, #673ab7); border-radius: 4px; flex-shrink: 0;"></div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 500;">鬼灭之刃</div>
+                                <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">第55集</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommend-sidebar-item" onclick="playAnime('咒术回战', 47)">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 60px; height: 40px; background: linear-gradient(135deg, #4caf50, #2196f3); border-radius: 4px; flex-shrink: 0;"></div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 500;">咒术回战</div>
+                                <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">第47集</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommend-sidebar-item" onclick="playAnime('死神', 366)">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 60px; height: 40px; background: linear-gradient(135deg, #607d8b, #795548); border-radius: 4px; flex-shrink: 0;"></div>
+                            <div>
+                                <div style="font-size: 14px; font-weight: 500;">死神</div>
+                                <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">第366集</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 评论区域 -->
+    <div class="comments-section">
+        <div class="comments-header" id="comments-header">💬 评论 (加载中...)</div>
+
+        <div class="comment-input">
+            <textarea placeholder="留下你的评论... (支持Markdown格式)"></textarea>
+            <button class="comment-submit" onclick="submitComment()">发表评论</button>
+        </div>
+
+        <div class="comment-list" id="comment-list">
+            <!-- 评论列表将通过JavaScript动态加载 -->
+        </div>
+    </div>
+</div>
+
+<!-- MuiPlayer 相关脚本 -->
+<script src="/muiplayer/mui-player/dist/mui-player.min.js"></script>
+<script src="/muiplayer/mui-player-desktop-plugin/dist/mui-player-desktop-plugin.min.js"></script>
+
+<script>
+    // MuiPlayer 实例
+    let muiPlayer = null;
+
+    // 播放器状态
+    let isPlaying = false;
+    let currentTime = 0;
+    let totalTime = 1470; // 24分30秒 = 1470秒
+    let volume = 0.7;
+    let isMuted = false;
+    let currentEpisode = 1100;
+
+    // 初始化 MuiPlayer
+    function initMuiPlayer(videoUrl) {
+        const actualVideoUrl = videoUrl || '/课时114：火焰的做法.mp4';
+        console.log('初始化播放器，视频 URL:', actualVideoUrl);
+
+        const config = {
+            container: '#mui-player',
+            src: actualVideoUrl,
+            title: '海贼王 第1100集',
+            poster: '',
+            autoplay: true,
+            height: '500px',
+            width: '100%',
+            autoFit: false,
+            plugins: [
+                typeof MuiPlayerDesktopPlugin == 'function' ? new MuiPlayerDesktopPlugin({
+                    thumbnails: {
+                        preview: [],
+                        tile: [10, 10],
+                        scale: [160, 90],
+                    },
+                }) : {},
+            ]
+        };
+
+        muiPlayer = new MuiPlayer(config);
+
+        // 监听播放器事件
+        muiPlayer.on('ready', function(e) {
+            console.log('播放器已就绪');
+            const video = muiPlayer.video();
+            if (video) {
+                console.log('视频元素 src:', video.src);
+
+                video.addEventListener('error', function(e) {
+                    console.error('视频加载失败:', e);
+                    console.error('视频 src:', video.src);
+                    console.error('错误代码:', video.error ? video.error.code : 'unknown');
+                    console.error('错误消息:', video.error ? video.error.message : 'unknown');
+                    console.error('网络状态:', video.networkState);
+                    console.error('就绪状态:', video.readyState);
+                    showToast('视频加载失败，请检查视频文件是否存在');
+                });
+
+                video.addEventListener('loadeddata', function() {
+                    console.log('视频数据加载成功');
+                    totalTime = video.duration || 1470;
+                    updateTotalTime();
+                });
+
+                video.addEventListener('timeupdate', function() {
+                    currentTime = video.currentTime;
+                    updateTimeDisplay();
+                    updateProgressBar();
+                });
+            }
+        });
+
+        muiPlayer.on('play', function(e) {
+            console.log('开始播放');
+            isPlaying = true;
+        });
+
+        muiPlayer.on('pause', function(e) {
+            console.log('暂停播放');
+            isPlaying = false;
+        });
+
+        muiPlayer.on('fullscreen-change', function(data) {
+            console.log('全屏状态改变', data);
+        });
+    }
+
+    // 更新总时间显示
+    function updateTotalTime() {
+        const totalTimeEl = document.getElementById('totalTime');
+        if (totalTimeEl) {
+            totalTimeEl.textContent = formatTime(totalTime);
+        }
+    }
+
+    // 剧集数据（将从API动态加载）
+    let episodes = [];
+
+    // 获取剧集标题
+    function getEpisodeTitle(episodeNumber) {
+        const titles = [
+            '最终决战！路飞VS凯多',
+            '红发登场！新时代的开幕',
+            '草帽团的集结',
+            '萨博的决意',
+            '黑胡子的野心',
+            '革命军的行动',
+            '五老星的秘密',
+            '伊姆大人的真面目',
+            '古代兵器的真相',
+            '空白的100年',
+            'D之一族的宿命',
+            '最终之岛拉夫德鲁',
+            '四皇的最终对决',
+            '世界政府的阴谋',
+            '天龙人的秘密',
+            '乔伊波伊的预言',
+            '太阳神尼卡',
+            '橡胶果实的觉醒',
+            '路飞的五档',
+            '鬼岛决战开幕'
+        ];
+        return titles[(episodeNumber - 1081) % titles.length] || `第${episodeNumber}集`;
+    }
+
+    // 初始化页面
+    function initPage() {
+        // 生成剧集列表
+        generateEpisodeList();
+
+        // 更新播放器时间显示
+        updateTimeDisplay();
+
+        // 设置当前剧集为高亮
+        highlightCurrentEpisode();
+
+        // 从URL参数获取动漫ID和剧集信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const animeId = urlParams.get('id');
+        const animeTitle = urlParams.get('anime');
+        const episodeParam = urlParams.get('ep') || urlParams.get('episode') || '1';
+        const videoUrl = urlParams.get('url');
+
+        // 初始化 MuiPlayer
+        initMuiPlayer(videoUrl ? decodeURIComponent(videoUrl) : null);
+
+        const episodeNum = parseInt(episodeParam);
+        if (!isNaN(episodeNum)) {
+            currentEpisode = episodeNum;
+            updateCurrentEpisodeInfo();
+            highlightCurrentEpisode();
+        }
+
+        // 如果有动漫ID或动漫名称，从API加载数据
+        if (animeId) {
+            loadAnimeDataForPlayer(animeId, episodeNum, videoUrl ? decodeURIComponent(videoUrl) : null);
+        } else if (animeTitle) {
+            loadAnimeDataByTitle(animeTitle, episodeNum, videoUrl ? decodeURIComponent(videoUrl) : null);
+        }
+    }
+
+    // 从API加载动漫数据用于播放器（通过ID）
+    async function loadAnimeDataForPlayer(animeId, ep, videoUrl) {
+        try {
+            const res = await fetch(`/api/anime/detail/${animeId}`);
+            const json = await res.json();
+            if (json.code !== 200 || !json.data) return;
+            const d = json.data;
+
+            updateAnimeInfo(d, animeId, ep, videoUrl);
+        } catch(e) {
+            console.log('加载播放器数据失败', e);
+            // 加载失败时设置默认值
+            updateAnimeInfoDefault();
+        }
+    }
+
+    // 从API加载动漫数据用于播放器（通过标题）
+    async function loadAnimeDataByTitle(animeTitle, ep, videoUrl) {
+        try {
+            const res = await fetch(`/api/anime/detail?title=${encodeURIComponent(animeTitle)}`);
+            const json = await res.json();
+
+            if (json.code !== 200) {
+                console.log('API返回错误:', json.message);
+                // API返回错误，尝试搜索动漫基本信息
+                await loadAnimeBasicInfo(animeTitle, ep);
+                return;
+            }
+
+            const d = json.data;
+            if (!d) {
+                console.log('没有找到动漫数据，尝试搜索基本信息');
+                // 没有数据，尝试搜索动漫基本信息
+                await loadAnimeBasicInfo(animeTitle, ep);
+                return;
+            }
+
+            // 如果返回的数据有id，使用id；否则使用title
+            const animeId = d.id || d.animeId;
+            updateAnimeInfo(d, animeId, ep, videoUrl);
+        } catch(e) {
+            console.log('加载播放器数据失败', e);
+            // 加载失败时，尝试搜索动漫基本信息
+            await loadAnimeBasicInfo(animeTitle, ep);
+        }
+    }
+
+    // 加载动漫基本信息（当详情加载失败时）
+    async function loadAnimeBasicInfo(animeTitle, ep) {
+        try {
+            // 尝试通过搜索API获取动漫基本信息
+            const res = await fetch(`/api/anime/search?keyword=${encodeURIComponent(animeTitle)}&page=1&size=1`);
+            const json = await res.json();
+
+            if (json.code === 200 && json.data && json.data.records && json.data.records.length > 0) {
+                const anime = json.data.records[0];
+                // 构造一个类似AnimeDetail的对象
+                const detail = {
+                    id: anime.id,
+                    title: anime.title,
+                    type: anime.type,
+                    coverImage: anime.coverImage,
+                    rating: anime.rating,
+                    status: anime.status,
+                    tags: anime.tags,
+                    totalEpisodes: anime.totalEpisodes || 0,
+                    viewCount: anime.viewCount
+                };
+                updateAnimeInfo(detail, anime.id, ep, null);
+            } else {
+                // 搜索也失败，设置默认值
+                updateAnimeInfoDefault(animeTitle);
+            }
+        } catch(e) {
+            console.log('搜索动漫基本信息失败', e);
+            updateAnimeInfoDefault(animeTitle);
+        }
+    }
+
+    // 设置默认动漫信息（当API加载失败时）
+    function updateAnimeInfoDefault(animeTitle = '') {
+        const titleText = animeTitle || '加载中...';
+
+        // 更新面包屑导航
+        const breadcrumbTypeLink = document.getElementById('breadcrumb-type-link');
+        const breadcrumbAnimeLink = document.getElementById('breadcrumb-anime-link');
+        if (breadcrumbTypeLink) {
+            breadcrumbTypeLink.textContent = '加载中...';
+            breadcrumbTypeLink.href = '/animation/index.html';
+            breadcrumbTypeLink.style.pointerEvents = 'none'; // 禁用点击
+            breadcrumbTypeLink.style.color = '#999';
+        }
+        if (breadcrumbAnimeLink) {
+            breadcrumbAnimeLink.textContent = titleText;
+            breadcrumbAnimeLink.href = '#';
+            breadcrumbAnimeLink.style.pointerEvents = 'none'; // 禁用点击
+            breadcrumbAnimeLink.style.color = '#999';
+        }
+
+        const breadcrumbEpisode = document.getElementById('breadcrumb-episode');
+        if (breadcrumbEpisode) {
+            breadcrumbEpisode.textContent = `第${currentEpisode}集 播放中`;
+        }
+
+        // 更新当前播放信息
+        const currentTitleEl = document.getElementById('page-title');
+        if (currentTitleEl) {
+            currentTitleEl.textContent = titleText;
+        }
+
+        const currentEpisodeEl = document.getElementById('page-episode');
+        if (currentEpisodeEl) {
+            currentEpisodeEl.textContent = `第${currentEpisode}集 · 播放中`;
+        }
+
+        // 更新右侧动漫信息侧边栏
+        const sidebarTitle = document.getElementById('sidebar-title');
+        if (sidebarTitle) {
+            sidebarTitle.textContent = titleText;
+        }
+
+        const sidebarType = document.getElementById('sidebar-type');
+        if (sidebarType) {
+            sidebarType.textContent = '加载中...';
+        }
+
+        const sidebarStatus = document.getElementById('sidebar-status');
+        if (sidebarStatus) {
+            sidebarStatus.textContent = '加载中...';
+        }
+
+        const sidebarRating = document.getElementById('sidebar-rating');
+        if (sidebarRating) {
+            sidebarRating.textContent = '加载中...';
+        }
+
+        const sidebarEpisodes = document.getElementById('sidebar-episodes');
+        if (sidebarEpisodes) {
+            sidebarEpisodes.textContent = '加载中...';
+        }
+    }
+
+    // 更新动漫信息的通用函数
+    function updateAnimeInfo(d, animeId, ep, videoUrl) {
+        // 更新标题
+        document.title = `${d.title} 第${ep}集 - 哈哈动漫网`;
+
+        // 更新面包屑导航
+        const breadcrumbTypeLink = document.getElementById('breadcrumb-type-link');
+        const breadcrumbAnimeLink = document.getElementById('breadcrumb-anime-link');
+        if (breadcrumbTypeLink && breadcrumbAnimeLink) {
+            const typePageMap = {
+                '日本': '/animation/japanese.html',
+                '国产': '/animation/chinese.html',
+                '欧美': '/animation/western.html'
+            };
+            const typeDisplayMap = {
+                '日本': '日本动漫',
+                '国产': '国产动漫',
+                '欧美': '欧美动漫'
+            };
+            const typePage = typePageMap[d.type] || '/animation/index.html';
+            const typeDisplay = typeDisplayMap[d.type] || d.type;
+            breadcrumbTypeLink.href = typePage;
+            breadcrumbTypeLink.textContent = typeDisplay;
+            breadcrumbTypeLink.style.pointerEvents = 'auto'; // 启用点击
+            breadcrumbTypeLink.style.color = ''; // 恢复默认颜色
+
+            breadcrumbAnimeLink.href = `/anime/detail?id=${animeId}`;
+            breadcrumbAnimeLink.textContent = d.title;
+            breadcrumbAnimeLink.style.pointerEvents = 'auto'; // 启用点击
+            breadcrumbAnimeLink.style.color = ''; // 恢复默认颜色
+        }
+
+        // 更新面包屑中的集数
+        const breadcrumbEpisode = document.getElementById('breadcrumb-episode');
+        if (breadcrumbEpisode) {
+            breadcrumbEpisode.textContent = `第${ep}集 播放中`;
+        }
+
+        // 更新当前播放信息
+        const currentTitleEl = document.getElementById('page-title');
+        if (currentTitleEl) {
+            currentTitleEl.textContent = d.title;
+        }
+
+        const currentEpisodeEl = document.getElementById('page-episode');
+        if (currentEpisodeEl) {
+            currentEpisodeEl.textContent = `第${ep}集 · 播放中`;
+        }
+
+        // 更新右侧动漫信息侧边栏
+        const sidebarTitle = document.querySelector('.anime-sidebar-title');
+        if (sidebarTitle) {
+            sidebarTitle.innerHTML = '<span>📺 动漫信息</span>';
+        }
+
+        const sidebarCover = document.getElementById('sidebar-cover');
+        if (sidebarCover) {
+            if (d.coverImage) {
+                sidebarCover.style.background = `url('${d.coverImage}') center/cover no-repeat`;
+            } else {
+                sidebarCover.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            }
+        }
+
+        const sidebarTitleEl = document.getElementById('sidebar-title');
+        if (sidebarTitleEl) {
+            sidebarTitleEl.textContent = d.title;
+        }
+
+        const sidebarType = document.getElementById('sidebar-type');
+        if (sidebarType) {
+            const tags = d.tags || '暂无标签';
+            sidebarType.textContent = tags;
+        }
+
+        const sidebarStatus = document.getElementById('sidebar-status');
+        if (sidebarStatus) {
+            sidebarStatus.textContent = d.status;
+        }
+
+        const sidebarRating = document.getElementById('sidebar-rating');
+        if (sidebarRating) {
+            sidebarRating.textContent = `⭐ ${d.rating}`;
+        }
+
+        const sidebarEpisodes = document.getElementById('sidebar-episodes');
+        if (sidebarEpisodes) {
+            sidebarEpisodes.textContent = `${d.totalEpisodes}+`;
+        }
+
+        const detailBtn = document.getElementById('sidebar-detail-btn');
+        if (detailBtn) {
+            detailBtn.setAttribute('onclick', `window.location.href='/anime/detail?id=${animeId}'`);
+        }
+
+        // 更新剧集列表（从episode_urls）
+        if (d.episodeUrls) {
+            try {
+                const eps = JSON.parse(d.episodeUrls);
+                if (eps && eps.length) {
+                    const episodeScroll = document.getElementById('episodeScroll');
+                    if (episodeScroll) {
+                        episodeScroll.innerHTML = eps.map(e => `
+                                <div class="episode-item ${e.ep === ep ? 'current' : ''}" onclick="playEpisodeUrl(${e.ep},'${e.url||''}')">
+                                    <div class="episode-number">第${e.ep}集</div>
+                                    <div class="episode-duration">${e.title || ''}</div>
+                                </div>
+                            `).join('');
+                    }
+                }
+            } catch(e) {}
+        }
+
+        // 如果有视频URL，加载到 MuiPlayer
+        const targetUrl = videoUrl || d.videoUrl;
+        if (muiPlayer && targetUrl) {
+            muiPlayer.config.src = targetUrl;
+            muiPlayer.config.title = `${d.title} 第${ep}集`;
+            if (muiPlayer.video()) {
+                muiPlayer.video().src = targetUrl;
+            }
+            // 更新播放器UI中的标题和其他元素
+            updatePlayerUI(`${d.title} 第${ep}集`);
+            showToast(`正在播放：${d.title} 第${ep}集`);
+        }
+
+        // 加载推荐
+        loadRecommend(d.type, animeId);
+
+        // 加载评论
+        loadComments(animeId);
+    }
+
+    // 更新播放器UI中的标题和其他元素
+    function updatePlayerUI(titleText) {
+        if (!muiPlayer) return;
+
+        // 更新配置中的标题
+        muiPlayer.config.title = titleText;
+
+        // 尝试更新播放器UI中的标题元素
+        setTimeout(() => {
+            // 优先更新 #title-name 元素（返回按钮内的标题）
+            const titleNameEl = document.getElementById('title-name');
+            if (titleNameEl) {
+                titleNameEl.textContent = titleText;
+            }
+
+            // 更新 #title-groupt 内的标题
+            const titleGroupEl = document.getElementById('title-groupt');
+            if (titleGroupEl) {
+                const titleInGroup = titleGroupEl.querySelector('.title-name, .title');
+                if (titleInGroup) {
+                    titleInGroup.textContent = titleText;
+                }
+            }
+
+            // MuiPlayer的标题通常在以下元素中
+            const titleSelectors = [
+                '#mui-player .title',
+                '#mui-player .player-title',
+                '#mui-player .video-title',
+                '#mui-player .m-player-header-title',
+                '#mui-player .header-title'
+            ];
+            titleSelectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    el.textContent = titleText;
+                });
+            });
+
+            // 尝试更新返回按钮的标题
+            const backButtonSelectors = [
+                '#mui-player .back-button',
+                '#mui-player .header-control .back-button',
+                '#mui-player .m-player-back-btn'
+            ];
+            backButtonSelectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    if (el.hasAttribute('title')) {
+                        el.setAttribute('title', '返回');
+                    }
+                });
+            });
+
+            // 尝试更新键盘输入相关的提示
+            const keyboardSelectors = [
+                '#mui-player .keyboard-input',
+                '#mui-player .player-btn',
+                '#mui-player .m-player-controls'
+            ];
+            keyboardSelectors.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    // 如果有需要更新的提示文本，可以在这里添加
+                });
+            });
+        }, 100);
+    }
+
+    function playEpisodeUrl(ep, url) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const animeId = urlParams.get('id');
+        const animeTitle = urlParams.get('anime');
+
+        // 更新当前集数
+        currentEpisode = ep;
+
+        // 更新当前播放信息
+        updateCurrentEpisodeInfo();
+
+        // 更新面包屑导航中的集数
+        const breadcrumbEpisode = document.getElementById('breadcrumb-episode');
+        if (breadcrumbEpisode) {
+            breadcrumbEpisode.textContent = `第${ep}集 播放中`;
+        }
+
+        // 手动更新剧集列表的高亮状态（直接操作DOM）
+        const episodeItems = document.querySelectorAll('.episode-item');
+        episodeItems.forEach(item => {
+            item.classList.remove('current');
+            const numberText = item.querySelector('.episode-number')?.textContent;
+            if (numberText && numberText === `第${ep}集`) {
+                item.classList.add('current');
+            }
+        });
+
+        // 更新 URL 参数（无论是否有视频URL都要更新）
+        const newUrl = new URL(window.location);
+        // 删除可能存在的 ep/url 参数
+        newUrl.searchParams.delete('ep');
+        newUrl.searchParams.delete('url');
+        // 根据原始URL使用的是 id 还是 anime 来决定如何更新
+        if (animeTitle) {
+            newUrl.searchParams.set('episode', ep);
+        } else if (animeId) {
+            newUrl.searchParams.set('ep', ep);
+        } else {
+            newUrl.searchParams.set('episode', ep);
+        }
+        window.history.replaceState({}, '', newUrl);
+
+        // 如果有 MuiPlayer 实例，直接切换视频
+        if (muiPlayer && url) {
+            const video = muiPlayer.video();
+            if (video) {
+                video.src = url;
+                video.play();
+            }
+
+            // 更新播放器标题和UI
+            const currentTitleEl = document.getElementById('page-title');
+            if (currentTitleEl) {
+                const animeTitleFromEl = currentTitleEl.textContent;
+                const playerTitle = `${animeTitleFromEl} 第${ep}集`;
+                muiPlayer.config.title = playerTitle;
+                updatePlayerUI(playerTitle);
+            }
+
+            showToast(`正在播放第${ep}集`);
+        } else {
+            // 否则刷新页面
+            if (animeTitle) {
+                window.location.href = `/animation/player.html?anime=${encodeURIComponent(animeTitle)}&episode=${ep}`;
+            } else {
+                window.location.href = `/animation/player.html?id=${animeId}&ep=${ep}`;
+            }
+        }
+    }
+
+    // 加载评论列表
+    async function loadComments(animeId) {
+        try {
+            const res = await fetch(`/api/comment/list?animeId=${animeId}&page=1&size=10`);
+            const json = await res.json();
+
+            const commentsHeader = document.getElementById('comments-header');
+            const commentList = document.getElementById('comment-list');
+
+            if (json.code === 200 && json.data) {
+                const comments = json.data.records || [];
+                const total = json.data.total || 0;
+
+                // 更新评论数量
+                if (commentsHeader) {
+                    commentsHeader.textContent = `💬 评论 (${total}条)`;
+                }
+
+                // 渲染评论列表
+                if (commentList) {
+                    if (comments.length === 0) {
+                        commentList.innerHTML = '<div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">暂无评论，快来发表第一条评论吧！</div>';
+                    } else {
+                        commentList.innerHTML = comments.map(c => `
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <div class="comment-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                                    <div>
+                                        <div class="comment-user">${c.username || '匿名用户'}</div>
+                                        <div class="comment-time">${formatTime(c.createTime)}</div>
+                                    </div>
+                                </div>
+                                <div class="comment-content">${c.content || ''}</div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } else {
+                // 加载失败时显示默认评论
+                if (commentList) {
+                    commentList.innerHTML = '<div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">评论加载失败</div>';
+                }
+            }
+        } catch (e) {
+            console.log('加载评论失败', e);
+            const commentList = document.getElementById('comment-list');
+            if (commentList) {
+                commentList.innerHTML = '<div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">评论加载失败</div>';
+            }
+        }
+    }
+
+    // 格式化时间
+    function formatTime(timeStr) {
+        if (!timeStr) return '未知时间';
+        const date = new Date(timeStr);
+        const now = new Date();
+        const diff = now - date;
+        const minutes = Math.floor(diff / 60000);
+        const hours = Math.floor(diff / 3600000);
+        const days = Math.floor(diff / 86400000);
+
+        if (minutes < 1) return '刚刚';
+        if (minutes < 60) return `${minutes}分钟前`;
+        if (hours < 24) return `${hours}小时前`;
+        if (days < 30) return `${days}天前`;
+        return date.toLocaleDateString('zh-CN');
+    }
+
+    // 加载推荐动漫
+    async function loadRecommend(type, excludeId) {
+        try {
+            const res = await fetch(`/api/anime/ranking?type=${encodeURIComponent(type||'全部')}&sortBy=viewCount&limit=6`);
+            const json = await res.json();
+            if (json.code !== 200) return;
+            const list = json.data.filter(a => String(a.id) !== String(excludeId)).slice(0, 5);
+            const container = document.querySelector('.recommend-list, .sidebar-recommend, #recommend-list');
+            if (container && list.length) {
+                container.innerHTML = list.map(a => `
+                        <div class="recommend-sidebar-item" onclick="window.location.href='/anime/player?id=${a.id}&ep=1'" style="display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background=''">
+                            <img src="${a.coverImage||''}" style="width:64px;height:88px;object-fit:cover;border-radius:4px;flex-shrink:0" onerror="this.style.background='linear-gradient(135deg,#667eea,#764ba2)'">
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:4px">${a.title}</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,.4)">⭐${a.rating} · ${a.status}</div>
+                            </div>
+                        </div>
+                    `).join('');
+            }
+        } catch(e) {}
+    }
+
+
+    // 生成剧集列表
+    function generateEpisodeList() {
+        const episodeScroll = document.getElementById('episodeScroll');
+        episodeScroll.innerHTML = '';
+
+        // 如果没有剧集数据，显示提示信息
+        if (!episodes || episodes.length === 0) {
+            episodeScroll.innerHTML = '<div style="padding: 30px; text-align: center; color: rgba(255,255,255,0.5);">暂无剧集数据</div>';
+            return;
+        }
+
+        episodes.forEach(episode => {
+            const episodeItem = document.createElement('div');
+            episodeItem.className = `episode-item ${episode.current ? 'current' : ''}`;
+            episodeItem.onclick = () => playEpisode(episode.number);
+
+            episodeItem.innerHTML = `
+                    <div class="episode-number">第${episode.number}集</div>
+                    <div class="episode-duration">${episode.duration}分钟</div>
+                `;
+
+            episodeScroll.appendChild(episodeItem);
+        });
+    }
+
+    // 搜索剧集
+    function searchEpisodes(query) {
+        // 如果没有剧集数据，不执行搜索
+        if (!episodes || episodes.length === 0) {
+            return;
+        }
+
+        const filteredEpisodes = episodes.filter(ep =>
+            ep.number.toString().includes(query) ||
+            getEpisodeTitle(ep.number).includes(query)
+        );
+
+        const episodeScroll = document.getElementById('episodeScroll');
+        episodeScroll.innerHTML = '';
+
+        if (filteredEpisodes.length === 0) {
+            episodeScroll.innerHTML = '<div style="padding: 30px; text-align: center; color: rgba(255,255,255,0.5);">未找到匹配的剧集</div>';
+            return;
+        }
+
+        filteredEpisodes.forEach(episode => {
+            const episodeItem = document.createElement('div');
+            episodeItem.className = `episode-item ${episode.current ? 'current' : ''}`;
+            episodeItem.onclick = () => playEpisode(episode.number);
+
+            episodeItem.innerHTML = `
+                    <div class="episode-number">第${episode.number}集</div>
+                    <div class="episode-duration">${episode.duration}分钟</div>
+                `;
+
+            episodeScroll.appendChild(episodeItem);
+        });
+    }
+
+    // 播放剧集
+    function playEpisode(episodeNumber) {
+        // 检查当前是否是从API加载的剧集列表
+        const episodeItems = document.querySelectorAll('.episode-item');
+        let episodeTitle = `第${episodeNumber}集`;
+        let episodeUrl = null;
+
+        // 尝试从DOM中获取剧集标题和URL
+        episodeItems.forEach(item => {
+            const numberText = item.querySelector('.episode-number')?.textContent;
+            const durationText = item.querySelector('.episode-duration')?.textContent;
+            if (numberText === `第${episodeNumber}集`) {
+                if (durationText && durationText !== `${Math.floor(Math.random() * 5) + 20}分钟`) {
+                    episodeTitle = durationText;
+                }
+                // 尝试从onclick属性获取URL
+                const onclickAttr = item.getAttribute('onclick');
+                if (onclickAttr) {
+                    const urlMatch = onclickAttr.match(/'([^']+)'/);
+                    if (urlMatch && urlMatch[1]) {
+                        episodeUrl = urlMatch[1];
+                    }
+                }
+            }
+        });
+
+        currentEpisode = episodeNumber;
+        updateCurrentEpisodeInfo();
+
+        // 手动更新剧集列表的高亮状态（直接操作DOM）
+        episodeItems.forEach(item => {
+            item.classList.remove('current');
+            const numberText = item.querySelector('.episode-number')?.textContent;
+            if (numberText && numberText === `第${episodeNumber}集`) {
+                item.classList.add('current');
+            }
+        });
+
+        // 重置播放器
+        currentTime = 0;
+        isPlaying = true;
+        updateTimeDisplay();
+        updateProgressBar();
+
+        // 显示播放提示
+        showToast(`开始播放第${episodeNumber}集`);
+
+        // 更新URL参数（无论是否有视频URL都要更新）
+        const urlParams = new URLSearchParams(window.location.search);
+        const animeId = urlParams.get('id');
+        const animeTitleParam = urlParams.get('anime');
+
+        const newUrl = new URL(window.location);
+        // 删除可能存在的 ep/url 参数
+        newUrl.searchParams.delete('ep');
+        newUrl.searchParams.delete('url');
+        // 根据原始URL使用的是 id 还是 anime 来决定如何更新
+        if (animeTitleParam) {
+            newUrl.searchParams.set('episode', episodeNumber);
+        } else if (animeId) {
+            newUrl.searchParams.set('ep', episodeNumber);
+        } else {
+            newUrl.searchParams.set('episode', episodeNumber);
+        }
+        window.history.replaceState({}, '', newUrl);
+
+        // 如果有URL且有播放器，切换视频
+        if (episodeUrl && muiPlayer) {
+            const video = muiPlayer.video();
+            if (video) {
+                video.src = episodeUrl;
+                video.play();
+            }
+
+            // 更新播放器标题和UI
+            const currentTitleEl = document.getElementById('page-title');
+            if (currentTitleEl) {
+                const animeTitle = currentTitleEl.textContent;
+                const playerTitle = `${animeTitle} 第${episodeNumber}集`;
+                muiPlayer.config.title = playerTitle;
+                updatePlayerUI(playerTitle);
+            }
+        }
+    }
+
+    // 播放其他动漫
+    function playAnime(animeName, episodeNumber) {
+        showToast(`正在打开${animeName}第${episodeNumber}集...`);
+        setTimeout(() => {
+            window.location.href = `/anime/player?title=${encodeURIComponent(animeName)}&ep=${episodeNumber}`;
+        }, 500);
+    }
+
+    // 更新当前剧集信息
+    function updateCurrentEpisodeInfo() {
+        const episodeTitle = document.getElementById('page-episode');
+        if (episodeTitle) {
+            episodeTitle.textContent = `第${currentEpisode}集 · 播放中`;
+        }
+
+        // 更新面包屑中的集数
+        const breadcrumbEpisode = document.getElementById('breadcrumb-episode');
+        if (breadcrumbEpisode) {
+            breadcrumbEpisode.textContent = `第${currentEpisode}集 播放中`;
+        }
+
+        // 从URL获取动漫标题（如果已加载）
+        const currentTitleEl = document.getElementById('page-title');
+        if (currentTitleEl && currentTitleEl.textContent && currentTitleEl.textContent !== '加载中...') {
+            // 如果已经从API加载了动漫信息，不修改标题
+            document.title = `播放中 - ${currentTitleEl.textContent}第${currentEpisode}集 - 哈哈动漫网`;
+        }
+    }
+
+    // 高亮当前剧集
+    function highlightCurrentEpisode() {
+        // 如果没有剧集数据，不执行
+        if (!episodes || episodes.length === 0) {
+            return;
+        }
+
+        document.querySelectorAll('.episode-item').forEach(item => {
+            item.classList.remove('current');
+        });
+
+        // 更新剧集数据中的当前状态
+        episodes.forEach(ep => {
+            ep.current = ep.number === currentEpisode;
+        });
+
+        // 重新生成列表以反映更改
+        generateEpisodeList();
+    }
+
+    // 播放/暂停
+    function togglePlay() {
+        if (muiPlayer) {
+            const video = muiPlayer.video();
+            if (video) {
+                if (video.paused) {
+                    video.play();
+                    showToast('继续播放');
+                } else {
+                    video.pause();
+                    showToast('已暂停');
+                }
+            }
+        }
+    }
+
+    // 快退
+    function skipBackward() {
+        if (muiPlayer) {
+            const video = muiPlayer.video();
+            if (video) {
+                video.currentTime = Math.max(0, video.currentTime - 10);
+                showToast('快退10秒');
+            }
+        }
+    }
+
+    // 快进
+    function skipForward() {
+        if (muiPlayer) {
+            const video = muiPlayer.video();
+            if (video) {
+                video.currentTime = Math.min(video.duration, video.currentTime + 10);
+                showToast('快进10秒');
+            }
+        }
+    }
+
+    // 播放上一集
+    function playPrevEpisode() {
+        const prevEpisode = currentEpisode - 1;
+        if (prevEpisode >= 1) {
+            // 检查是否还有上一集（从剧集列表中查找）
+            const episodeItems = document.querySelectorAll('.episode-item');
+            let hasPrevEpisode = false;
+            episodeItems.forEach(item => {
+                const numberText = item.querySelector('.episode-number')?.textContent;
+                if (numberText === `第${prevEpisode}集`) {
+                    hasPrevEpisode = true;
+                }
+            });
+
+            if (hasPrevEpisode) {
+                playEpisode(prevEpisode);
+            } else {
+                showToast('已经是第一集了');
+            }
+        } else {
+            showToast('已经是第一集了');
+        }
+    }
+
+    // 播放下一集
+    function playNextEpisode() {
+        const nextEpisode = currentEpisode + 1;
+        // 检查是否还有下一集（从剧集列表中查找）
+        const episodeItems = document.querySelectorAll('.episode-item');
+        let hasNextEpisode = false;
+        episodeItems.forEach(item => {
+            const numberText = item.querySelector('.episode-number')?.textContent;
+            if (numberText === `第${nextEpisode}集`) {
+                hasNextEpisode = true;
+            }
+        });
+
+        if (hasNextEpisode) {
+            playEpisode(nextEpisode);
+        } else {
+            showToast('已经是最新一集了');
+        }
+    }
+
+    // 更新进度条
+    function updateProgressBar() {
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill && totalTime > 0) {
+            const percentage = (currentTime / totalTime) * 100;
+            progressFill.style.width = `${percentage}%`;
+        }
+    }
+
+    // 点击进度条跳转
+    document.getElementById('progressBar').addEventListener('click', function(e) {
+        if (muiPlayer) {
+            const video = muiPlayer.video();
+            if (video) {
+                const rect = this.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percentage = clickX / rect.width;
+                video.currentTime = percentage * video.duration;
+                showToast(`跳转到 ${formatTime(video.currentTime)}`);
+            }
+        }
+    });
+
+    // 更新时间显示
+    function updateTimeDisplay() {
+        const currentTimeEl = document.getElementById('currentTime');
+        if (currentTimeEl) {
+            currentTimeEl.textContent = formatTime(currentTime);
+        }
+    }
+
+    // 格式化时间 (秒 -> MM:SS)
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // 提交评论
+    function submitComment() {
+        const textarea = document.querySelector('.comment-input textarea');
+        const comment = textarea.value.trim();
+
+        if (!comment) {
+            showToast('请输入评论内容');
+            return;
+        }
+
+        // 在实际应用中，这里会发送AJAX请求保存评论
+        showToast('评论发表成功！');
+        textarea.value = '';
+
+        // 模拟添加新评论到列表顶部
+        const commentList = document.querySelector('.comment-list');
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-avatar"></div>
+                    <div>
+                        <div class="comment-user">我</div>
+                        <div class="comment-time">刚刚</div>
+                    </div>
+                </div>
+                <div class="comment-content">${comment}</div>
+            `;
+
+        commentList.insertBefore(newComment, commentList.firstChild);
+    }
+
+    // Toast提示
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.textContent = message;
+        toast.style.cssText = `
+                position: fixed;
+                top: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 25px;
+                z-index: 10000;
+                animation: fadeInOut 2s ease-in-out;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            `;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 2000);
+    }
+
+    // 添加CSS动画
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            }
+
+            .recommend-sidebar-item {
+                padding: 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .recommend-sidebar-item:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateX(5px);
+            }
+        `;
+    document.head.appendChild(style);
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', initPage);
+</script>
+</body>
+</html>

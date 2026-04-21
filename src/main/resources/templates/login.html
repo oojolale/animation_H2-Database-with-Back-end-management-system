@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <link href="./jqueryIp/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html{
+            height: 100vh;
+            background: url("./images/downloaded-image.png") no-repeat;
+            background-size: cover;
+        }
+        body{
+            background: transparent;
+        }
+        .login-btn{
+            background: #0d6efd;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-btn:hover{
+            background: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">用户登录</h4>
+                    <h4 class="text-center">账号：admin22121</h4>
+                    <h4 class="text-center">密码：admin123</h4>
+                </div>
+                <div class="card-body">
+                    <!-- CSRF Token -->
+                    <input type="hidden" id="csrf-token" th:value="${_csrf.token}" />
+
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        用户名或密码错误！
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        您已成功退出登录！
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">用户名</label>
+                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember-me">
+                        <label class="form-check-label" for="remember-me">记住我</label>
+                    </div>
+
+                    <div class="login-btn w-100 text-center py-2 rounded" onclick="doLogin()">登录</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="/jqueryIp/js/jquery.js"></script>
+<script type="text/javascript">
+    async function doLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const rememberMe = document.getElementById('remember-me').checked;
+        const csrfToken = document.getElementById('csrf-token').value;
+
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
+        if (rememberMe) {
+            formData.append('remember-me', 'on');
+        }
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: formData.toString(),
+                redirect: 'manual'
+            });
+
+            if (response.type === 'opaqueredirect' || response.status === 302) {
+                window.location.href = '/';
+            } else if (response.status === 302 || response.status === 303) {
+                const redirectUrl = response.headers.get('Location');
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    window.location.href = '/';
+                }
+            } else if (response.ok) {
+                window.location.href = '/';
+            } else {
+                window.location.href = '/login?error';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            window.location.href = '/login?error';
+        }
+    }
+
+</script>

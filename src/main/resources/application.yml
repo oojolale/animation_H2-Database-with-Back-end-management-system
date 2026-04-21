@@ -1,0 +1,58 @@
+# H2 Database Configuration
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./animation_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+  web:
+    resources:
+      static-locations:
+        'classpath:/templates/,classpath:/static/,file:/usr/share/nginx/static/'
+  servlet:
+    multipart:
+      enabled: true
+      location: '/usr/share/nginx/static/'
+      max-file-size: 200000MB
+      max-request-size: 200000MB
+  devtools:
+    restart:
+      enabled: true
+  mail:
+    host: smtp.exmail.qq.com
+    port: 587
+    username: 3942607275@qq.com
+    password: "di7219212"
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail-smtp-host: smtp.exmail.qq.com
+      mail-smtp-auth: true
+      mail-smtp-ssl-enable: true
+      mail-smtp-socketFactory-class: com.sun.mail.util.MailSSLSocketFactory
+      mail-smtp-socketFactory-port: 587
+      mail-smtp-socketFactory-fallback: false
+      mail-transport-protocol: smtp
+
+mail:
+  to: 3942607275@qq.com
+  replyTo: 572233016@qq.com
+  templatePath: email
+  subject: "农村金融开发环境异常警告"
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

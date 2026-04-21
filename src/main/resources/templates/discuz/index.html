@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="upper">
+				<div class="setAsHomepage">
+					<span>设为首页</span>
+					<span>收藏本站</span>
+				</div>
+				<div class="bookmarkThisSite">
+
+				</div>
+				<div class="diy">
+					diy
+				</div>
+			</div>
+			<div class="top">
+				<div class="box">
+					<div class="logo">
+						<img src="./img/community.gif" alt="" style="width: 100%;height: 100%;">
+					</div>
+					<div class="navigate" style="display: flex;width: 80%;">
+						<div class="nav" onclick='javascript:window.location.href="#"'><span>农场</span></div>
+						<!-- <div class="nav active" onclick='javascript:window.location.href="./index.html"'><span>首页</span></div> -->
+						<div class="nav" onclick='javascript:window.location.href="./bulletinBoard.html"'><span>论坛</span></div>
+						<div class="nav" onclick='javascript:window.location.href="./collectibleFigure.html"'><span>手办</span></div>
+						<div class="nav" onclick='javascript:window.location.href="./picture.html"'><span>图库</span></div>
+						<div class="nav"><span>圈子</span></div>
+						<div class="nav"><span>淘帖</span></div>
+						<div class="nav"><span>动态</span></div>
+						<div class="nav"><span>广场</span></div>
+						<div class="nav"><span>导读</span></div>
+						<div class="nav"><span>排行榜</span></div>
+					</div>
+					<div class="combo">
+						<div class="search">
+							🔍
+						</div>
+						<div class="notice">
+							🔔
+						</div>
+						<div class="p1" style="line-height: 26px;" onclick="change()">
+							💱
+						</div>
+						<div class="p2">
+
+						</div>
+						<div class="p3">
+
+						</div>
+						<label class="nav_switch" for="lang"><i class="iconfont iconfanyijianli"></i></label>
+					</div>
+				</div>
+			</div>
+			<div class="promotion">
+				<div class="banner" style="width: 80%;">
+
+				</div>
+				<div class="advertise" style="width: 20%;">
+					<div class="ad"></div>
+					<div class="ad"></div>
+				</div>
+			</div>
+			<div class="indulge">
+				<div class="section1" style="width: 20%;">
+					<div style="border: 0px solid #000;height: 100%;">
+						<div class="link">
+							<div>
+								<div>icon</div>
+								<div>企业家事</div>
+							</div>
+							<div>
+								<div>icon</div>
+								<div>员工互动</div>
+							</div>
+							<div>
+								<div>icon</div>
+								<div>荣耀殿堂</div>
+							</div>
+							<div>
+								<div>icon</div>
+								<div>党建之窗</div>
+							</div>
+							<div>
+								<div>icon</div>
+								<div>建言献策</div>
+							</div>
+							<div>
+								<div>icon</div>
+								<div>内刊文化</div>
+							</div>
+						</div>
+						<div class="report">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">媒体报道</div>
+							</div>
+							<div class="scroll" style="height: calc(100% - 39px);overflow: auto;">
+								<div style="height: calc((100% - 34px)/3);text-align: center;">
+									<div style="height: calc(100% - 22px);">img</div>
+									<div>title</div>
+								</div>
+								<div style="height: calc((100% - 34px)/3);text-align: center;">
+									<div style="height: calc(100% - 22px);">img</div>
+									<div>title</div>
+								</div>
+								<div style="height: calc((100% - 34px)/3);text-align: center;">
+									<div style="height: calc(100% - 22px);">img</div>
+									<div>title</div>
+								</div>
+								<div style="height: calc((100% - 34px)/3);text-align: center;">
+									<div style="height: calc(100% - 22px);">img</div>
+									<div>title</div>
+								</div>
+							</div>
+						</div>
+						<div class="public">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">官方公告</div>
+							</div>
+							<div>
+								<ul>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section2" style="width: 60%;">
+					<div class="recently">
+						<div
+							style="display: flex;justify-content: space-between;align-items: center;border-bottom: 1px silver solid;">
+							<div
+								style="width: 100px;height: 35px;color:#fff;background-color: #ff5e3a;text-align:center;line-height: 35px;">
+								焦点快讯</div>
+							<div>每一个清晨，给自己一个微笑。</div>
+						</div>
+						<div style="height: calc(100% - 50px);overflow: auto;">
+							<div style="height:33%;padding:10px">
+								<div>title1</div>
+								<div>正文</div>
+							</div>
+							<div style="height:33%;padding:10px">
+								<div>title2</div>
+								<div>正文</div>
+							</div>
+							<div style="height:33%;padding:10px">
+								<div>title3</div>
+								<div>正文</div>
+							</div>
+						</div>
+					</div>
+					<div class="advert">
+
+					</div>
+					<div class="papers">
+						<div style="display: flex;">
+							<div class="active">热点推荐</div>
+							<div>最新发表</div>
+							<div>最新回复</div>
+							<div>社区热门</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 42px);overflow: auto;">
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div>img</div>
+								<div>
+									<div>title</div>
+									<div>
+										<div>text</div>
+										<div>
+											<div>view</div>
+											<div>message</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section3" style="width: 20%;">
+					<div class="upload">
+						<button>我要发贴</button>
+					</div>
+					<div class="topic">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+								<dfn>热点话题</dfn>
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+							<ol>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="topicNoteBox">
+										<div>title1</div>
+										<div class="topicNote">
+											<div>img拉克丝</div>
+											<div>512阅读</div>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="organic">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+								<dfn>七彩生活</dfn>
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;padding:0 5px;">
+							<div style="height: 100px;">
+								img
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;">524人气</div>
+									</div>
+								</div>
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;">524人气</div>
+									</div>
+								</div>
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;">524人气</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="privacy">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div
+								style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;display: flex;justify-content: space-between;">
+								<dfn>会员榜</dfn>
+								<div style="display:flex;margin-right: 5px;">
+									<div class="privacyTab active">积分榜</div>
+									<div class="privacyTab">发财榜</div>
+								</div>
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+							<ol>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+
+
+							</ol>
+						</div>
+					</div>
+					<div class="news">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">新鲜事</div>
+						</div>
+						<ul>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<div class="change" style="position: fixed;right: 25px;border:0px solid aqua;top: 80%;">
+				<div class="button">change</div>
+				<div class="button">edit</div>
+				<div class="button">wechat</div>
+			</div>
+		</div>
+		<div class="footer" style="width: 98vw;height: 250px;">
+			
+		</div>
+	</body>
+	<script type="text/javascript">	
+		let index = 0;
+		function change(){
+			index%2===0?changeColor(index%2):changeColor(index%2)
+			index++
+		}
+		function changeColor(index){
+			color=(index===0?'#000':'#fff')
+			zcolor=(index===0?'#fff':'#000')
+			backgroundColor=(index===0?"#000000c9":'#fff')
+			document.querySelector(".container").style.background = backgroundColor
+			document.querySelector(".footer").style.background = backgroundColor
+			document.querySelector(".top").style.background = color
+			document.querySelector(".link").style.background = color
+			document.querySelector(".recently").style.background = color
+			document.querySelector(".topic").style.background = color
+			document.querySelector(".organic").style.background = color
+			document.querySelector(".privacy").style.background = color
+			document.querySelector(".papers").style.background = color
+			document.querySelector(".report").style.background = color
+			document.querySelector(".public").style.background = color
+			document.querySelector(".news").style.background = color
+			document.querySelectorAll(".scroll").forEach(element => {
+			    if(index===0){
+			        element.style["scrollbar-color"] = "#3498db #000000"
+			    }
+			    else{
+			        element.style["scrollbar-color"] = "#3498db #f1f1f1"
+			    }
+		    })
+			document.querySelector(".container").style.color = zcolor
+			document.querySelector(".footer").style.color = zcolor
+		}
+		change()
+	</script>
+</html>

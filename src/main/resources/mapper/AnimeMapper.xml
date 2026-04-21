@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.animation.mapper.AnimeMapper">
+
+    <!-- 按类型查询（全部时不过滤type） -->
+    <select id="selectByType" resultType="com.web.animation.entity.Anime">
+        SELECT * FROM anime
+        <where>
+            <if test="type != null and type != '' and type != '全部'">
+                AND type = #{type}
+            </if>
+        </where>
+        ORDER BY rating DESC, view_count DESC
+    </select>
+
+</mapper>

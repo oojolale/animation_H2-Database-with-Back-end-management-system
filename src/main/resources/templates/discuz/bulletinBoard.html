@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/bulletinBoard.css" />
+	</head>
+	<body id="webfont" class="alimamaAgile">
+		<div class="container">
+			<div class="upper">
+				<div class="setAsHomepage">
+					<span>设为首页</span>
+					<span>收藏本站</span>
+				</div>
+				<div class="bookmarkThisSite">
+
+				</div>
+				<div id="diy">
+					<span>alimamaAgile</span>
+					diy
+				</div>
+			</div>
+			<div class="top">
+				<div class="box">
+					<div class="logo">
+						<img src="./img/community.gif" alt="" style="width: 100%;height: 100%;">
+					</div>
+					<div class="navigate" style="display: flex;width: 80%;">
+						<div class="nav" onclick='javascript:window.location.href="#"'><span>农场</span></div>
+						<!-- <div class="nav" onclick='javascript:window.location.href="./index.html"'><span>首页</span></div> -->
+						<div class="nav active" onclick='javascript:window.location.href="./bulletinBoard.html"'><span>论坛</span></div>
+						<div class="nav" onclick='javascript:window.location.href="./collectibleFigure.html"'><span>手办</span></div>
+						<div class="nav" onclick='javascript:window.location.href="./picture.html"'><span>图库</span></div>
+						<div class="nav"><span>圈子</span></div>
+						<div class="nav"><span>淘帖</span></div>
+						<div class="nav"><span>动态</span></div>
+						<div class="nav"><span>广场</span></div>
+						<div class="nav"><span>导读</span></div>
+						<div class="nav"><span>排行榜</span></div>
+					</div>
+					<div class="combo">
+						<div class="search">
+							🔍
+						</div>
+						<div class="notice">
+							🔔
+						</div>
+						<div class="p1" style="line-height: 26px;" onclick="change()">
+							💱
+						</div>
+						<div class="p2" style="line-height: 26px;" onclick="changeFont()">
+							🗛
+						</div>
+						<div class="p3">
+
+						</div>
+						<label class="nav_switch" for="lang"><i class="iconfont iconfanyijianli"></i></label>
+					</div>
+				</div>
+			</div>
+			<div class="navigation">
+				<span class="text">icon</span><span class="punctuation">〉</span><span class="text">论坛</span>
+				<div class="history">
+					<span>今日:3</span>
+					<span>昨日:0</span>
+					<span>帖子:357</span>
+					<span>会员:15</span>
+					<span>欢迎新会员：<span class="userCard">未认证账户53</span></span>
+				</div>
+			</div>
+			<div class="promotion">
+				<div class="banner" style="width: 50%;">
+
+				</div>
+				<div class="advertise" style="width: 50%;">
+					<div class="guide"></div>
+					<div class="primer"></div>
+				</div>
+			</div>
+			<div class="navigation">
+				<span class="text">icon</span><span class="text">公告</span>
+				<div class="">
+					Discuz官方联系方式，谨防上当受骗！(2025-12-31)
+				</div>
+				<div class="upload">
+					<button>我要发贴</button>
+				</div>
+			</div>
+			<div class="indulge">
+				<div class="section1" style="width: 70%;">
+					<div style="border: 0px solid #000;height: 100%;">
+						<div class="collection">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+									<dfn>我收藏的板块</dfn>
+								</div>
+							</div>
+							<div class="scroll" style="justify-content: start;display: flex;height: calc(100% - 34px);overflow: auto;">
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="enterprise">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+									<dfn>走进企业</dfn>
+								</div>
+							</div>
+							<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+								<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex;align-items: center;padding:15px 30px;">
+										<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+										<div>
+											<div>时尚秀场</div>
+											<div>
+												<div>
+													<span>主题：20</span><span>贴数：21</span>
+												</div>
+												<div>
+													<span>xxxxxx</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="report">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+									<dfn>七彩生活</dfn>
+								</div>
+							</div>
+							<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+									<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="scroll" style="justify-content: start;display: flex;overflow: auto;">
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="display: flex;align-items: center;padding:15px 30px;">
+											<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+											<div>
+												<div>时尚秀场</div>
+												<div>
+													<div>
+														<span>主题：20</span><span>贴数：21</span>
+													</div>
+													<div>
+														<span>xxxxxx</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+						<div class="public">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">站务服务</div>
+							</div>
+							<div class="scroll" style="justify-content: start;display: flex;height: calc(100% - 34px);overflow: auto;">
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding:30px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="onlineMember">
+							<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+								<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">在线会员</div>
+							</div>
+							<div>
+								<ul>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section3" style="width: 30%;">
+					<div class="topic">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+								<dfn>我订阅的专辑</dfn>
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+							<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+								<div style="display: flex;align-items: center;padding-top:20px;padding-left:15px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding-top:20px;padding-left:15px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="display: flex;align-items: center;padding-top:20px;padding-left:15px;">
+									<div><img src="./img/圣诞屋.png" width="40" alt=""></div>
+									<div>
+										<div>时尚秀场</div>
+										<div>
+											<div>
+												<span>主题：20</span><span>贴数：21</span>
+											</div>
+											<div>
+												<span>xxxxxx</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="organic">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">
+								<dfn>图文热点</dfn>
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;padding:0 5px;">
+							<div style="height: 100px;">
+								img
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;padding: 10px 0;box-sizing: border-box;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;display: flex;justify-content: space-between;">
+											<div>#员工互动</div>
+											<div>524人气</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;display: flex;justify-content: space-between;">
+											<div>#员工互动</div>
+											<div>524人气</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="organicBox">
+								<div style="height: 100%;">
+									<div style="width: 30%;">img</div>
+									<div
+										style="width: 70%;display: flex;justify-content: space-between;flex-direction: column;">
+										<div>515511155</div>
+										<div style="text-align: right;display: flex;justify-content: space-between;">
+											<div>#员工互动</div>
+											<div>524人气</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="privacy">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div
+								style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;display: flex;justify-content: space-between;">
+								<dfn>今日推荐</dfn>
+								<!-- <div style="display:flex;margin-right: 5px;">
+									<div class="privacyTab active">积分榜</div>
+									<div class="privacyTab">发财榜</div>
+								</div> -->
+							</div>
+						</div>
+						<div class="scroll" style="height: calc(100% - 34px);overflow: auto;">
+							<ol>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+								<li>
+									<div style="display: flex;justify-content: space-between;flex-flow: nowrap;">
+										<div style="display: flex;">
+											<div style="margin-right: 15px;">img</div>
+											<div>title</div>
+										</div>
+										<div style="margin-right: 10px;">number</div>
+									</div>
+								</li>
+
+
+							</ol>
+						</div>
+					</div>
+					<div class="news">
+						<div style="border-bottom: 1px silver solid;padding: 5px 0;">
+							<div style="padding-left:5px;border-left: 2px solid blue;margin-left: 5px;">新鲜事</div>
+						</div>
+						<ul>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+							<li>title</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<div class="change" style="position: fixed;right: 25px;border:0px solid aqua;top: 80%;">
+				<div class="button">change</div>
+				<div class="button">edit</div>
+				<div class="button">wechat</div>
+			</div>
+		</div>
+		<div class="footer" style="width: 98vw;height: 250px;">
+			
+		</div>
+	</body>
+	<script type="text/javascript">	
+		let index = 0;
+		function change(){
+			index%2===0?changeColor(index%2):changeColor(index%2)
+			index++
+		}
+		let number = 0;
+		function changeFont(){
+			document.querySelector("#webfont").classList.remove("alimamaAgile")
+			document.querySelector("#webfont").classList.remove("alimamaInDaoLi")
+			document.querySelector("#webfont").classList.remove("smugBlack")
+			document.querySelector("#webfont").classList.remove("nablaColorVariableFont")
+			document.querySelector("#webfont").classList.remove("dingTalkProgress")
+			switch (number%5){
+				case 0:
+				document.querySelector("#webfont").classList.add("alimamaInDaoLi")
+				document.querySelector("#diy>span").innerText = "alimamaInDaoLi"
+					break;
+				case 1:
+				document.querySelector("#webfont").classList.add("smugBlack")
+				document.querySelector("#diy>span").innerText = "smugBlack"
+					break;
+				case 2:
+				document.querySelector("#webfont").classList.add("nablaColorVariableFont")
+				document.querySelector("#diy>span").innerText = "nablaColorVariableFont"
+					break;
+				case 3:
+				document.querySelector("#webfont").classList.add("dingTalkProgress")
+				document.querySelector("#diy>span").innerText = "dingTalkProgress"
+					break;
+				case 4:
+				document.querySelector("#webfont").classList.add("alimamaAgile")
+				document.querySelector("#diy>span").innerText = "alimamaAgile"
+					break;
+				default:
+					break;
+			}
+			number++
+		}
+ 
+		function changeColor(index){
+			color=(index===0?'#000':'#fff')
+			zcolor=(index===0?'#fff':'#000')
+			backgroundColor=(index===0?"#000000c9":'#fff')
+			document.querySelector(".container").style.background = backgroundColor
+			document.querySelector(".footer").style.background = backgroundColor
+			document.querySelector(".top").style.background = color
+			// document.querySelector(".recently").style.background = color
+			document.querySelector(".topic").style.background = color
+			document.querySelector(".organic").style.background = color
+			document.querySelector(".privacy").style.background = color
+			// document.querySelector(".papers").style.background = color
+			document.querySelector(".report").style.background = color
+			document.querySelector(".public").style.background = color
+			document.querySelector(".collection").style.background = color
+			document.querySelector(".enterprise").style.background = color
+			document.querySelector(".onlineMember").style.background = color
+			document.querySelector(".news").style.background = color
+			document.querySelectorAll(".scroll").forEach(element => {
+			    if(index===0){
+			        element.style["scrollbar-color"] = "#3498db #000000"
+			    }
+			    else{
+			        element.style["scrollbar-color"] = "#3498db #f1f1f1"
+			    }
+		    })
+			document.querySelector(".container").style.color = zcolor
+			document.querySelector(".footer").style.color = zcolor
+		}
+		change()
+	</script>
+</html>

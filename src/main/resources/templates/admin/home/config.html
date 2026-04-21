@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页配置 - 哈哈动漫网</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f7fa; color: #333; }
+        a { text-decoration: none; color: inherit; }
+        
+        .admin-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 0 30px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .admin-logo { font-size: 20px; font-weight: bold; }
+        
+        .admin-container { display: flex; min-height: calc(100vh - 60px); }
+        .sidebar { width: 220px; background: #fff; border-right: 1px solid #e8e8e8; padding: 20px 0; }
+        .sidebar-section { margin-bottom: 10px; }
+        .sidebar-title { padding: 10px 20px; font-size: 12px; color: #999; text-transform: uppercase; }
+        .sidebar-item a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: #666; font-size: 14px; }
+        .sidebar-item a:hover, .sidebar-item a.active { background: #f5f7fa; color: #667eea; border-left: 3px solid #667eea; }
+        
+        .main-content { flex: 1; padding: 30px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .page-title { font-size: 24px; font-weight: 600; }
+        
+        .card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        
+        .config-section { margin-bottom: 30px; }
+        .config-title { font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #667eea; }
+        .config-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        
+        .config-item { background: #f8f9fa; border: 1px solid #eee; border-radius: 10px; padding: 15px; transition: all 0.3s; }
+        .config-item:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .config-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .config-item-title { font-weight: 600; font-size: 15px; }
+        .config-item-badge { padding: 3px 8px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border-radius: 12px; font-size: 11px; }
+        .config-item-content { font-size: 13px; color: #666; margin-bottom: 10px; }
+        .config-item-actions { display: flex; gap: 8px; }
+        
+        .btn { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.3s; border: none; color: #fff; }
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .btn-primary:hover { box-shadow: 0 4px 15px rgba(102,126,234,0.4); }
+        .btn-success { background: #52c41a; }
+        .btn-danger { background: #ff4d4f; }
+        .btn-sm { padding: 5px 10px; font-size: 12px; }
+        
+        .tip-box { background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border: 1px solid rgba(102,126,234,0.3); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .tip-title { font-weight: 600; margin-bottom: 10px; color: #667eea; }
+        .tip-content { font-size: 14px; color: #666; line-height: 1.8; }
+        
+        .type-list { margin-top: 20px; }
+        .type-item { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; }
+        .type-label { font-weight: 600; min-width: 100px; color: #667eea; }
+        .type-desc { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-logo">🎬 哈哈动漫网管理系统</div>
+        <div style="font-size:14px;">
+            <a href="/admin/index" style="color:#fff;margin-right:20px;">控制台</a>
+            <a href="/logout" style="color:#fff;">退出</a>
+        </div>
+    </header>
+    
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">内容管理</div>
+                <div class="sidebar-item"><a href="/admin/anime">🎬 动漫管理</a></div>
+                <div class="sidebar-item"><a href="/admin/news">📰 资讯管理</a></div>
+                <div class="sidebar-item"><a href="/admin/category">📂 分类管理</a></div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">系统设置</div>
+                <div class="sidebar-item"><a href="/admin/banner">🖼️ 轮播图</a></div>
+                <div class="sidebar-item"><a href="/admin/home/config" class="active">🏠 首页配置</a></div>
+                <div class="sidebar-item"><a href="/admin/user">👥 用户管理</a></div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">首页配置</h1>
+            </div>
+            
+            <div class="tip-box">
+                <div class="tip-title">💡 配置说明</div>
+                <div class="tip-content">
+                    首页配置用于管理网站首页各个模块的显示内容。通过配置首页模块，您可以：<br>
+                    • 动态选择首页轮播图显示哪些动漫<br>
+                    • 设置热门推荐、最新更新等模块的内容<br>
+                    • 管理不同分类的展示顺序<br>
+                    • 配置排行榜、资讯等模块
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">配置类型说明</h3>
+                <div class="type-list">
+                    <div class="type-item">
+                        <span class="type-label">banner</span>
+                        <span class="type-desc">首页轮播图模块 - 设置首页轮播显示的动漫</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">latest</span>
+                        <span class="type-desc">最新动漫模块 - 首页显示的最新上映动漫</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">hot</span>
+                        <span class="type-desc">热门推荐模块 - 首页显示的热门推荐动漫</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">japanese</span>
+                        <span class="type-desc">日本动漫模块 - 首页日漫专区显示内容</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">chinese</span>
+                        <span class="type-desc">国产动漫模块 - 首页国漫专区显示内容</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">western</span>
+                        <span class="type-desc">欧美动漫模块 - 首页欧美专区显示内容</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">news</span>
+                        <span class="type-desc">资讯模块 - 首页资讯列表显示内容</span>
+                    </div>
+                    <div class="type-item">
+                        <span class="type-label">ranking</span>
+                        <span class="type-desc">排行榜模块 - 首页排行榜显示内容</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">当前配置</h3>
+                <div class="config-grid" id="configList">
+                    <div style="text-align:center;padding:40px;color:#999;grid-column:1/-1;">加载中...</div>
+                </div>
+            </div>
+            
+            <div style="margin-top:20px;">
+                <a href="/aaa" target="_blank" class="btn btn-primary">🌐 预览网站首页</a>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        async function loadConfigs() {
+            const container = document.getElementById('configList');
+            try {
+                const typeLabels = {
+                    'banner': '轮播图',
+                    'latest': '最新动漫',
+                    'hot': '热门推荐',
+                    'japanese': '日漫专区',
+                    'chinese': '国漫专区',
+                    'western': '欧美专区',
+                    'news': '资讯',
+                    'ranking': '排行榜'
+                };
+                
+                container.innerHTML = Object.entries(typeLabels).map(([type, label]) => `
+                    <div class="config-item">
+                        <div class="config-item-header">
+                            <span class="config-item-title">${label}</span>
+                            <span class="config-item-badge">${type}</span>
+                        </div>
+                        <div class="config-item-content">配置类型: ${type}</div>
+                        <div class="config-item-actions">
+                            <button onclick="alert('配置功能开发中')" class="btn btn-primary btn-sm">编辑</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch(e) {
+                container.innerHTML = '<div style="text-align:center;padding:40px;color:#999;grid-column:1/-1;">加载失败</div>';
+            }
+        }
+        
+        loadConfigs();
+    </script>
+</body>
+</html>
