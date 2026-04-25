@@ -184,7 +184,7 @@
                     body: JSON.stringify(data)
                 });
                 const json = await res.json();
-                alert(json.message);
+                alert(json.msg);
                 if (json.code === 200) location.href = '/admin/anime';
             } catch(e) { alert('保存失败'); }
         });
